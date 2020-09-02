@@ -27,6 +27,8 @@ RUN set -x \
         php7.4-fpm \
         php7.4-json \
         php7.4-opcache \
+        php7.4-pgsql \
+        php7.4-xml \
         supervisor \
         vim \
         iputils-ping \
@@ -49,6 +51,11 @@ RUN set -x\
     && chmod +x /usr/local/bin/entrypoint.sh \
     && chmod +x /usr/local/bin/init.sh
 
+ENV PG_HOST postgresql
+ENV PG_PORT 5432
+ENV PG_DATABASE sms
+ENV PG_USER postgres
+ENV PG_PASSWORD postgres
 ENV SMS_HOST sms
 ENV SMS_PROVIDER 'smscru'
 ENV SMS_DUMMY 'false'

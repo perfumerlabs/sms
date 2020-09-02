@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<database name="sms" defaultIdMethod="native" namespace="Sms\Model">
+    <table name="sms_blacklist" phpName="Blacklist">
+        <column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true"/>
+        <column name="phone" type="varchar" size="255" required="true"/> <!-- Phone to be blacklisted -->
+        <behavior name="timestampable">
+            <parameter name="disable_updated_at" value="true" />
+        </behavior>
+        <unique>
+            <unique-column name="phone"/>
+        </unique>
+    </table>
+</database>

@@ -17,8 +17,15 @@ docker run \
 -e SMSCRU_SENDER=sender \
 -e SMSCRU_USERNAME=username \
 -e SMSCRU_PASSWORD=password \
--d perfumerlabs/sms:v1.0.0
+-e PG_HOST=db \
+-e PG_PORT=5432 \
+-e PG_DATABASE=sms_db \
+-e PG_USER=user \
+-e PG_PASSWORD=password \
+-d perfumerlabs/sms:v1.1.0
 ```
+
+Database must be created before container startup.
 
 Environment variables
 =====================
@@ -29,6 +36,11 @@ Environment variables
 - SMSCRU_SENDER - [smsc.ru](https://smsc.ru) provider sender name for sms. Required, if this provider is used.
 - SMSCRU_USERNAME - [smsc.ru](https://smsc.ru) provider login. Required, if this provider is used.
 - SMSCRU_PASSWORD - [smsc.ru](https://smsc.ru) provider password. Required, if this provider is used.
+- PG_HOST - PostgreSQL host. Required.
+- PG_PORT - PostgreSQL port. Default value is 5432.
+- PG_DATABASE - PostgreSQL database name. Required.
+- PG_USER - PostgreSQL user name. Required.
+- PG_PASSWORD - PostgreSQL user password. Required.
 - PHP_PM_MAX_CHILDREN - number of FPM workers. Default value is 10.
 - PHP_PM_MAX_REQUESTS - number of FPM max requests. Default value is 500.
 
@@ -38,6 +50,13 @@ Volumes
 This image has no volumes.
 
 If you want to make any additional configuration of container, mount your bash script to /opt/setup.sh. This script will be executed on container setup.
+
+Software
+========
+
+1. Ubuntu 16.04 Xenial
+1. Nginx 1.16
+1. PHP 7.4
 
 Supported providers for now
 ===========================
@@ -56,9 +75,11 @@ API Reference
 Parameters (json):
 - phones [array|string,required] - phones to send to, without "+".
 - message [string,required] - message text to send.
+- force [bool,optional] - if "true" ignores blacklisting. Default is false.
 
 Request example:
-```javascript
+
+```json
 {
     "phones": ["77011234567", "77070001234"],
     "message": "Hello, world!"
@@ -67,8 +88,83 @@ Request example:
 
 Response example:
 
-```javascript
+```json
 {
     "status": true
+}
+```
+
+### Add phone to blacklist
+
+`POST /blacklist`
+
+Parameters (json):
+- phone [string,required] - phone to add, without "+".
+
+Request example:
+
+```json
+{
+    "phone": "77011234567"
+}
+```
+
+Response example:
+
+```json
+{
+    "status": true
+}
+```
+
+### Delete phone from blacklist
+
+`DELETE /blacklist/{:phone}`
+
+Parameters (url):
+- phone [string,required] - phone to delete, without "+".
+
+Request example:
+
+```query
+DELETE /blacklist/77011234567
+```
+
+Response has 404 status code, if not in the blacklist.
+
+Response example, if in the blacklist:
+
+```json
+{
+    "status": true
+}
+```
+
+### Check if phone in blacklist
+
+`GET /blacklist/{:phone}`
+
+Parameters (url):
+- phone [string,required] - phone to check, without "+".
+
+Request example:
+
+```query
+GET /blacklist/77011234567
+```
+
+Response has 404 status code, if not in the blacklist.
+
+Response example, if in the blacklist:
+
+```json
+{
+    "status": true,
+    "content": {
+        "blacklist": {
+            "phone": "77011234567",
+            "created_at": "2020-09-01 00:00:00"
+        }
+    }   
 }
 ```

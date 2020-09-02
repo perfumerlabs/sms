@@ -34,6 +34,10 @@ SMSCRU_USERNAME_SED=${SMSCRU_USERNAME//\//\\\/}
 SMSCRU_USERNAME_SED=${SMSCRU_USERNAME_SED//\./\\\.}
 SMSCRU_PASSWORD_SED=${SMSCRU_PASSWORD//\//\\\/}
 SMSCRU_PASSWORD_SED=${SMSCRU_PASSWORD_SED//\./\\\.}
+PG_HOST_SED=${PG_HOST//\//\\\/}
+PG_HOST_SED=${PG_HOST_SED//\./\\\.}
+PG_PASSWORD_SED=${PG_PASSWORD//\//\\\/}
+PG_PASSWORD_SED=${PG_PASSWORD_SED//\./\\\.}
 
 sed -i "s/SMS_HOST/$SMS_HOST_SED/g" /opt/sms/src/Gateway.php
 sed -i "s/SMS_PROVIDER/$SMS_PROVIDER/g" /opt/sms/src/Resource/config/resources_shared.php
@@ -41,5 +45,15 @@ sed -i "s/SMS_DUMMY/$SMS_DUMMY/g" /opt/sms/src/Resource/config/resources_shared.
 sed -i "s/SMSCRU_SENDER/$SMSCRU_SENDER_SED/g" /opt/sms/src/Resource/config/resources_shared.php
 sed -i "s/SMSCRU_USERNAME/$SMSCRU_USERNAME_SED/g" /opt/sms/src/Resource/config/resources_shared.php
 sed -i "s/SMSCRU_PASSWORD/$SMSCRU_PASSWORD_SED/g" /opt/sms/src/Resource/config/resources_shared.php
+sed -i "s/PG_HOST/$PG_HOST_SED/g" /opt/sms/src/Resource/config/resources_shared.php
+sed -i "s/PG_PORT/$PG_PORT/g" /opt/sms/src/Resource/config/resources_shared.php
+sed -i "s/PG_DATABASE/$PG_DATABASE/g" /opt/sms/src/Resource/config/resources_shared.php
+sed -i "s/PG_USER/$PG_USER/g" /opt/sms/src/Resource/config/resources_shared.php
+sed -i "s/PG_PASSWORD/$PG_PASSWORD_SED/g" /opt/sms/src/Resource/config/resources_shared.php
+sed -i "s/PG_HOST/$PG_HOST_SED/g" /opt/sms/src/Resource/propel/connection/propel.php
+sed -i "s/PG_PORT/$PG_PORT/g" /opt/sms/src/Resource/propel/connection/propel.php
+sed -i "s/PG_DATABASE/$PG_DATABASE/g" /opt/sms/src/Resource/propel/connection/propel.php
+sed -i "s/PG_USER/$PG_USER/g" /opt/sms/src/Resource/propel/connection/propel.php
+sed -i "s/PG_PASSWORD/$PG_PASSWORD_SED/g" /opt/sms/src/Resource/propel/connection/propel.php
 
 touch /node_status_inited

@@ -2,6 +2,7 @@
 
 namespace Project;
 
+use Perfumer\Package\Framework\Module\ConsoleModule;
 use Sms\Module\CommandModule;
 use Sms\Module\ControllerModule;
 use Perfumer\Package\Framework\Module\HttpModule;
@@ -20,6 +21,7 @@ class Application extends \Perfumer\Framework\Application\Application
 
         $this->addModule(new HttpModule(),       'http');
         $this->addModule(new ControllerModule(), 'http');
+        $this->addModule(new ConsoleModule(),    'cli');
         $this->addModule(new CommandModule(),    'cli');
     }
 
@@ -32,5 +34,6 @@ class Application extends \Perfumer\Framework\Application\Application
 
     protected function after(): void
     {
+        $this->container->get('propel.service_container');
     }
 }

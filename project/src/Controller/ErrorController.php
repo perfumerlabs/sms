@@ -11,6 +11,13 @@ class ErrorController extends LayoutController
         $this->setErrorMessage($message);
     }
 
+    public function pageNotFound($message)
+    {
+        $this->getExternalResponse()->setStatusCode(404);
+
+        $this->setErrorMessage($message);
+    }
+
     public function internalServerError(\Throwable $e)
     {
         $this->getExternalResponse()->setStatusCode(500);

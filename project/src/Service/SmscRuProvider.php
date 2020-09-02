@@ -4,6 +4,7 @@ namespace Sms\Service;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ConnectException;
+use Sms\Helper\Phone;
 
 class SmscRuProvider extends AbstractProvider
 {
