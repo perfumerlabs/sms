@@ -43,7 +43,7 @@ class PropelMigration_1599032660
             'sms' => '
 BEGIN;
 
-CREATE TABLE "sms_blacklist"
+CREATE TABLE IF NOT EXISTS "sms_blacklist"
 (
     "id" serial NOT NULL,
     "phone" VARCHAR(255) NOT NULL,

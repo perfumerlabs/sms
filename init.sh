@@ -56,4 +56,8 @@ sed -i "s/PG_DATABASE/$PG_DATABASE/g" /opt/sms/src/Resource/propel/connection/pr
 sed -i "s/PG_USER/$PG_USER/g" /opt/sms/src/Resource/propel/connection/propel.php
 sed -i "s/PG_PASSWORD/$PG_PASSWORD_SED/g" /opt/sms/src/Resource/propel/connection/propel.php
 
+set -x \
+&& cd /opt/sms \
+&& sudo -u sms php cli framework propel/migrate
+
 touch /node_status_inited

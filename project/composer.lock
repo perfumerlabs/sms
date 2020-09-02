@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "404ec00a7349e9c3d0229f3ef70dcfcb",
+    "content-hash": "7239df80e189f13c3aab558d41abf394",
     "packages": [
         {
             "name": "guzzlehttp/guzzle",
@@ -288,16 +288,16 @@
         },
         {
             "name": "perfumer/framework",
-            "version": "v0.8.5",
+            "version": "v0.9.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/perfumer/framework.git",
-                "reference": "9c19c2509e9ca05302ae7d301f01feb70b30c153"
+                "reference": "9c5cc1e718a5b0512ba7574c7c2e3e6e00c8e4bb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/perfumer/framework/zipball/9c19c2509e9ca05302ae7d301f01feb70b30c153",
-                "reference": "9c19c2509e9ca05302ae7d301f01feb70b30c153",
+                "url": "https://api.github.com/repos/perfumer/framework/zipball/9c5cc1e718a5b0512ba7574c7c2e3e6e00c8e4bb",
+                "reference": "9c5cc1e718a5b0512ba7574c7c2e3e6e00c8e4bb",
                 "shasum": ""
             },
             "require": {
@@ -331,7 +331,7 @@
             "keywords": [
                 "framework"
             ],
-            "time": "2020-07-12T11:28:29+00:00"
+            "time": "2020-09-02T08:47:46+00:00"
         },
         {
             "name": "propel/propel",
@@ -626,7 +626,7 @@
         },
         {
             "name": "symfony/config",
-            "version": "v4.4.12",
+            "version": "v4.4.13",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/config.git",
@@ -690,16 +690,16 @@
         },
         {
             "name": "symfony/console",
-            "version": "v4.4.12",
+            "version": "v4.4.13",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
-                "reference": "1f601a29fd7591a0316bffbc0d7550a5953c6c1c"
+                "reference": "b39fd99b9297b67fb7633b7d8083957a97e1e727"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/console/zipball/1f601a29fd7591a0316bffbc0d7550a5953c6c1c",
-                "reference": "1f601a29fd7591a0316bffbc0d7550a5953c6c1c",
+                "url": "https://api.github.com/repos/symfony/console/zipball/b39fd99b9297b67fb7633b7d8083957a97e1e727",
+                "reference": "b39fd99b9297b67fb7633b7d8083957a97e1e727",
                 "shasum": ""
             },
             "require": {
@@ -763,7 +763,7 @@
             ],
             "description": "Symfony Console Component",
             "homepage": "https://symfony.com",
-            "time": "2020-08-17T07:39:58+00:00"
+            "time": "2020-09-02T07:07:21+00:00"
         },
         {
             "name": "symfony/deprecation-contracts",
@@ -817,7 +817,7 @@
         },
         {
             "name": "symfony/filesystem",
-            "version": "v4.4.12",
+            "version": "v4.4.13",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/filesystem.git",
@@ -867,7 +867,7 @@
         },
         {
             "name": "symfony/finder",
-            "version": "v4.4.12",
+            "version": "v4.4.13",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/finder.git",
@@ -916,7 +916,7 @@
         },
         {
             "name": "symfony/http-foundation",
-            "version": "v5.1.4",
+            "version": "v5.1.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/http-foundation.git",
@@ -1613,7 +1613,7 @@
         },
         {
             "name": "symfony/validator",
-            "version": "v4.4.12",
+            "version": "v4.4.13",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/validator.git",
@@ -1706,7 +1706,7 @@
         },
         {
             "name": "symfony/yaml",
-            "version": "v4.4.12",
+            "version": "v4.4.13",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/yaml.git",

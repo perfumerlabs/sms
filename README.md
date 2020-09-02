@@ -22,7 +22,7 @@ docker run \
 -e PG_DATABASE=sms_db \
 -e PG_USER=user \
 -e PG_PASSWORD=password \
--d perfumerlabs/sms:v1.1.0
+-d perfumerlabs/sms:v1.1.1
 ```
 
 Database must be created before container startup.
