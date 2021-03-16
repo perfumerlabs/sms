@@ -1,6 +1,6 @@
 FROM ubuntu:xenial
 
-MAINTAINER Ilyas Makashev <mehmatovec@gmail.com>
+LABEL authors="Ilyas Makashev mehmatovec@gmail.com"
 
 RUN set -x \
     && apt-get update \
