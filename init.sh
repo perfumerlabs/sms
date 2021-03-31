@@ -26,8 +26,6 @@ sed -i "s/listen.owner = www-data/listen.owner = sms/g" /etc/php/7.4/fpm/pool.d/
 sed -i "s/listen.group = www-data/listen.group = sms/g" /etc/php/7.4/fpm/pool.d/www.conf
 sed -i "s/;catch_workers_output = yes/catch_workers_output = yes/g" /etc/php/7.4/fpm/pool.d/www.conf
 
-SMS_HOST_SED=${SMS_HOST//\//\\\/}
-SMS_HOST_SED=${SMS_HOST_SED//\./\\\.}
 SMSCRU_SENDER_SED=${SMSCRU_SENDER//\//\\\/}
 SMSCRU_SENDER_SED=${SMSCRU_SENDER_SED//\./\\\.}
 SMSCRU_USERNAME_SED=${SMSCRU_USERNAME//\//\\\/}
@@ -39,22 +37,33 @@ PG_HOST_SED=${PG_HOST_SED//\./\\\.}
 PG_PASSWORD_SED=${PG_PASSWORD//\//\\\/}
 PG_PASSWORD_SED=${PG_PASSWORD_SED//\./\\\.}
 
-sed -i "s/SMS_HOST/$SMS_HOST_SED/g" /opt/sms/src/Gateway.php
-sed -i "s/SMS_PROVIDER/$SMS_PROVIDER/g" /opt/sms/src/Resource/config/resources_shared.php
-sed -i "s/SMS_DUMMY/$SMS_DUMMY/g" /opt/sms/src/Resource/config/resources_shared.php
-sed -i "s/SMSCRU_SENDER/$SMSCRU_SENDER_SED/g" /opt/sms/src/Resource/config/resources_shared.php
-sed -i "s/SMSCRU_USERNAME/$SMSCRU_USERNAME_SED/g" /opt/sms/src/Resource/config/resources_shared.php
-sed -i "s/SMSCRU_PASSWORD/$SMSCRU_PASSWORD_SED/g" /opt/sms/src/Resource/config/resources_shared.php
-sed -i "s/PG_HOST/$PG_HOST_SED/g" /opt/sms/src/Resource/config/resources_shared.php
-sed -i "s/PG_PORT/$PG_PORT/g" /opt/sms/src/Resource/config/resources_shared.php
-sed -i "s/PG_DATABASE/$PG_DATABASE/g" /opt/sms/src/Resource/config/resources_shared.php
-sed -i "s/PG_USER/$PG_USER/g" /opt/sms/src/Resource/config/resources_shared.php
-sed -i "s/PG_PASSWORD/$PG_PASSWORD_SED/g" /opt/sms/src/Resource/config/resources_shared.php
-sed -i "s/PG_HOST/$PG_HOST_SED/g" /opt/sms/src/Resource/propel/connection/propel.php
-sed -i "s/PG_PORT/$PG_PORT/g" /opt/sms/src/Resource/propel/connection/propel.php
-sed -i "s/PG_DATABASE/$PG_DATABASE/g" /opt/sms/src/Resource/propel/connection/propel.php
-sed -i "s/PG_USER/$PG_USER/g" /opt/sms/src/Resource/propel/connection/propel.php
-sed -i "s/PG_PASSWORD/$PG_PASSWORD_SED/g" /opt/sms/src/Resource/propel/connection/propel.php
+if [ $DEV != 'true' ]; then
+  sed -i "s/\$this->addResources(__DIR__ \. '\/\.\.\/env\.php');//g" /opt/sms/src/Application.php
+  sed -i "s/SMS_PROVIDER/$SMS_PROVIDER/g" /opt/sms/src/Resource/config/resources_shared.php
+  sed -i "s/SMS_DUMMY/$SMS_DUMMY/g" /opt/sms/src/Resource/config/resources_shared.php
+  sed -i "s/SMSCRU_SENDER/$SMSCRU_SENDER_SED/g" /opt/sms/src/Resource/config/resources_shared.php
+  sed -i "s/SMSCRU_USERNAME/$SMSCRU_USERNAME_SED/g" /opt/sms/src/Resource/config/resources_shared.php
+  sed -i "s/SMSCRU_PASSWORD/$SMSCRU_PASSWORD_SED/g" /opt/sms/src/Resource/config/resources_shared.php
+  sed -i "s/PG_HOST/$PG_HOST_SED/g" /opt/sms/src/Resource/config/resources_shared.php
+  sed -i "s/PG_PORT/$PG_PORT/g" /opt/sms/src/Resource/config/resources_shared.php
+  sed -i "s/PG_DATABASE/$PG_DATABASE/g" /opt/sms/src/Resource/config/resources_shared.php
+  sed -i "s/PG_SCHEMA/$PG_SCHEMA/g" /opt/sms/src/Resource/config/resources_shared.php
+  sed -i "s/PG_USER/$PG_USER/g" /opt/sms/src/Resource/config/resources_shared.php
+  sed -i "s/PG_PASSWORD/$PG_PASSWORD_SED/g" /opt/sms/src/Resource/config/resources_shared.php
+  sed -i "s/PG_HOST/$PG_HOST_SED/g" /opt/sms/src/Resource/propel/connection/propel.php
+  sed -i "s/PG_PORT/$PG_PORT/g" /opt/sms/src/Resource/propel/connection/propel.php
+  sed -i "s/PG_DATABASE/$PG_DATABASE/g" /opt/sms/src/Resource/propel/connection/propel.php
+  sed -i "s/PG_SCHEMA/$PG_SCHEMA/g" /opt/sms/src/Resource/propel/connection/propel.php
+  sed -i "s/PG_USER/$PG_USER/g" /opt/sms/src/Resource/propel/connection/propel.php
+  sed -i "s/PG_PASSWORD/$PG_PASSWORD_SED/g" /opt/sms/src/Resource/propel/connection/propel.php
+fi
+
+if [ $DEV = 'true' ]; then
+  set -x \
+  && cd /opt/sms \
+  && cp env.example.php env.php \
+  && cp propel.example.php propel.php
+fi
 
 set -x \
 && cd /opt/sms \

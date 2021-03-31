@@ -1,6 +1,6 @@
 FROM ubuntu:xenial
 
-MAINTAINER Ilyas Makashev <mehmatovec@gmail.com>
+LABEL authors="Ilyas Makashev mehmatovec@gmail.com"
 
 RUN set -x \
     && apt-get update \
@@ -54,9 +54,9 @@ RUN set -x\
 ENV PG_HOST postgresql
 ENV PG_PORT 5432
 ENV PG_DATABASE sms
+ENV PG_SCHEMA public
 ENV PG_USER postgres
 ENV PG_PASSWORD postgres
-ENV SMS_HOST sms
 ENV SMS_PROVIDER 'smscru'
 ENV SMS_DUMMY 'false'
 ENV SMSCRU_SENDER ''
@@ -64,6 +64,7 @@ ENV SMSCRU_USERNAME ''
 ENV SMSCRU_PASSWORD ''
 ENV PHP_PM_MAX_CHILDREN 10
 ENV PHP_PM_MAX_REQUESTS 500
+ENV DEV false
 
 EXPOSE 80
 

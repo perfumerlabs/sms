@@ -24,7 +24,6 @@ use Sms\Model\BlacklistQuery;
  * For example, the createSelectSql() method checks the type of a given column used in an
  * ORDER BY clause to know whether it needs to apply SQL to make the ORDER BY case-insensitive
  * (i.e. if it's a text column type).
- *
  */
 class BlacklistTableMap extends TableMap
 {
@@ -120,6 +119,39 @@ class BlacklistTableMap extends TableMap
     );
 
     /**
+     * Holds a list of column names and their normalized version.
+     *
+     * @var string[]
+     */
+    protected $normalizedColumnNameMap = [
+
+        'Id' => 'ID',
+        'Blacklist.Id' => 'ID',
+        'id' => 'ID',
+        'blacklist.id' => 'ID',
+        'BlacklistTableMap::COL_ID' => 'ID',
+        'COL_ID' => 'ID',
+        'id' => 'ID',
+        'sms_blacklist.id' => 'ID',
+        'Phone' => 'PHONE',
+        'Blacklist.Phone' => 'PHONE',
+        'phone' => 'PHONE',
+        'blacklist.phone' => 'PHONE',
+        'BlacklistTableMap::COL_PHONE' => 'PHONE',
+        'COL_PHONE' => 'PHONE',
+        'phone' => 'PHONE',
+        'sms_blacklist.phone' => 'PHONE',
+        'CreatedAt' => 'CREATED_AT',
+        'Blacklist.CreatedAt' => 'CREATED_AT',
+        'createdAt' => 'CREATED_AT',
+        'blacklist.createdAt' => 'CREATED_AT',
+        'BlacklistTableMap::COL_CREATED_AT' => 'CREATED_AT',
+        'COL_CREATED_AT' => 'CREATED_AT',
+        'created_at' => 'CREATED_AT',
+        'sms_blacklist.created_at' => 'CREATED_AT',
+    ];
+
+    /**
      * Initialize the table attributes and columns
      * Relations are not initialized by this method since they are lazy loaded
      *
@@ -138,7 +170,7 @@ class BlacklistTableMap extends TableMap
         $this->setPrimaryKeyMethodInfo('sms_blacklist_id_seq');
         // columns
         $this->addPrimaryKey('id', 'Id', 'INTEGER', true, null, null);
-        $this->addColumn('phone', 'Phone', 'VARCHAR', false, 255, null);
+        $this->addColumn('phone', 'Phone', 'VARCHAR', true, 255, null);
         $this->addColumn('created_at', 'CreatedAt', 'TIMESTAMP', false, null, null);
     } // initialize()
 
@@ -310,6 +342,30 @@ class BlacklistTableMap extends TableMap
             $criteria->addSelectColumn($alias . '.id');
             $criteria->addSelectColumn($alias . '.phone');
             $criteria->addSelectColumn($alias . '.created_at');
+        }
+    }
+
+    /**
+     * Remove all the columns needed to create a new object.
+     *
+     * Note: any columns that were marked with lazyLoad="true" in the
+     * XML schema will not be removed as they are only loaded on demand.
+     *
+     * @param Criteria $criteria object containing the columns to remove.
+     * @param string   $alias    optional table alias
+     * @throws PropelException Any exceptions caught during processing will be
+     *                         rethrown wrapped into a PropelException.
+     */
+    public static function removeSelectColumns(Criteria $criteria, $alias = null)
+    {
+        if (null === $alias) {
+            $criteria->removeSelectColumn(BlacklistTableMap::COL_ID);
+            $criteria->removeSelectColumn(BlacklistTableMap::COL_PHONE);
+            $criteria->removeSelectColumn(BlacklistTableMap::COL_CREATED_AT);
+        } else {
+            $criteria->removeSelectColumn($alias . '.id');
+            $criteria->removeSelectColumn($alias . '.phone');
+            $criteria->removeSelectColumn($alias . '.created_at');
         }
     }
 

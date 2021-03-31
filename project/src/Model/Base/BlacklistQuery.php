@@ -35,12 +35,12 @@ use Sms\Model\Map\BlacklistTableMap;
  * @method     ChildBlacklistQuery rightJoinWith($relation) Adds a RIGHT JOIN clause and with to the query
  * @method     ChildBlacklistQuery innerJoinWith($relation) Adds a INNER JOIN clause and with to the query
  *
- * @method     ChildBlacklist findOne(ConnectionInterface $con = null) Return the first ChildBlacklist matching the query
+ * @method     ChildBlacklist|null findOne(ConnectionInterface $con = null) Return the first ChildBlacklist matching the query
  * @method     ChildBlacklist findOneOrCreate(ConnectionInterface $con = null) Return the first ChildBlacklist matching the query, or a new ChildBlacklist object populated from the query conditions when no match is found
  *
- * @method     ChildBlacklist findOneById(int $id) Return the first ChildBlacklist filtered by the id column
- * @method     ChildBlacklist findOneByPhone(string $phone) Return the first ChildBlacklist filtered by the phone column
- * @method     ChildBlacklist findOneByCreatedAt(string $created_at) Return the first ChildBlacklist filtered by the created_at column *
+ * @method     ChildBlacklist|null findOneById(int $id) Return the first ChildBlacklist filtered by the id column
+ * @method     ChildBlacklist|null findOneByPhone(string $phone) Return the first ChildBlacklist filtered by the phone column
+ * @method     ChildBlacklist|null findOneByCreatedAt(string $created_at) Return the first ChildBlacklist filtered by the created_at column *
 
  * @method     ChildBlacklist requirePk($key, ConnectionInterface $con = null) Return the ChildBlacklist by primary key and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
  * @method     ChildBlacklist requireOne(ConnectionInterface $con = null) Return the first ChildBlacklist matching the query and throws \Propel\Runtime\Exception\EntityNotFoundException when not found

@@ -11,7 +11,6 @@ Installation
 ```bash
 docker run \
 -p 80:80/tcp \
--e SMS_HOST=example.com \
 -e SMS_PROVIDER=smscru \
 -e SMS_DUMMY=false \
 -e SMSCRU_SENDER=sender \
@@ -22,7 +21,7 @@ docker run \
 -e PG_DATABASE=sms_db \
 -e PG_USER=user \
 -e PG_PASSWORD=password \
--d perfumerlabs/sms:v1.1.1
+-d perfumerlabs/sms:v1.2.0
 ```
 
 Database must be created before container startup.
@@ -30,7 +29,6 @@ Database must be created before container startup.
 Environment variables
 =====================
 
-- SMS_HOST - server domain (without http://). Required.
 - SMS_PROVIDER - Sms provider to use. Required. Currently the only value is "smscru".
 - SMS_DUMMY - If this is "true", sms will not be sent, but response will be as sms was successfully sent. Useful in development configurations. Optional. Default is "false".
 - SMSCRU_SENDER - [smsc.ru](https://smsc.ru) provider sender name for sms. Required, if this provider is used.
@@ -39,6 +37,7 @@ Environment variables
 - PG_HOST - PostgreSQL host. Required.
 - PG_PORT - PostgreSQL port. Default value is 5432.
 - PG_DATABASE - PostgreSQL database name. Required.
+- PG_SCHEMA - PostgreSQL database schema. Default is "public".
 - PG_USER - PostgreSQL user name. Required.
 - PG_PASSWORD - PostgreSQL user password. Required.
 - PHP_PM_MAX_CHILDREN - number of FPM workers. Default value is 10.
@@ -50,13 +49,6 @@ Volumes
 This image has no volumes.
 
 If you want to make any additional configuration of container, mount your bash script to /opt/setup.sh. This script will be executed on container setup.
-
-Software
-========
-
-1. Ubuntu 16.04 Xenial
-1. Nginx 1.16
-1. PHP 7.4
 
 Supported providers for now
 ===========================
@@ -168,3 +160,10 @@ Response example, if in the blacklist:
     }   
 }
 ```
+
+Software
+========
+
+1. Ubuntu 16.04 Xenial
+1. Nginx 1.16
+1. PHP 7.4
