@@ -32,6 +32,8 @@ SMSCRU_USERNAME_SED=${SMSCRU_USERNAME//\//\\\/}
 SMSCRU_USERNAME_SED=${SMSCRU_USERNAME_SED//\./\\\.}
 SMSCRU_PASSWORD_SED=${SMSCRU_PASSWORD//\//\\\/}
 SMSCRU_PASSWORD_SED=${SMSCRU_PASSWORD_SED//\./\\\.}
+PG_REAL_HOST_SED=${PG_REAL_HOST//\//\\\/}
+PG_REAL_HOST_SED=${PG_REAL_HOST_SED//\./\\\.}
 PG_HOST_SED=${PG_HOST//\//\\\/}
 PG_HOST_SED=${PG_HOST_SED//\./\\\.}
 PG_PASSWORD_SED=${PG_PASSWORD//\//\\\/}
@@ -45,6 +47,7 @@ if [ $DEV != 'true' ]; then
   sed -i "s/SMSCRU_USERNAME/$SMSCRU_USERNAME_SED/g" /opt/sms/src/Resource/config/resources_shared.php
   sed -i "s/SMSCRU_PASSWORD/$SMSCRU_PASSWORD_SED/g" /opt/sms/src/Resource/config/resources_shared.php
   sed -i "s/PG_HOST/$PG_HOST_SED/g" /opt/sms/src/Resource/config/resources_shared.php
+  sed -i "s/PG_REAL_HOST/$PG_REAL_HOST_SED/g" /opt/sms/src/Resource/config/resources_shared.php
   sed -i "s/PG_PORT/$PG_PORT/g" /opt/sms/src/Resource/config/resources_shared.php
   sed -i "s/PG_DATABASE/$PG_DATABASE/g" /opt/sms/src/Resource/config/resources_shared.php
   sed -i "s/PG_SCHEMA/$PG_SCHEMA/g" /opt/sms/src/Resource/config/resources_shared.php
@@ -67,6 +70,6 @@ fi
 
 set -x \
 && cd /opt/sms \
-&& sudo -u sms php cli framework propel/migrate
+&& sudo -u sms php cli sms startup
 
 touch /node_status_inited
