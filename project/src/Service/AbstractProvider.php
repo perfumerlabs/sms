@@ -9,5 +9,5 @@ abstract class AbstractProvider
      * @param string $text
      * @return bool
      */
-    abstract public function send($phones, $text): bool;
+    abstract public function send($phones, $text, $type): bool;
 }

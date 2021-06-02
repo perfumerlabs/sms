@@ -47,7 +47,7 @@ class SmscRuProvider extends AbstractProvider
      * @param string $message
      * @return bool
      */
-    public function send($phones, $message): bool
+    public function send($phones, $message, $type): bool
     {
         if (!is_array($phones)) {
             $phones = [$phones];
@@ -65,8 +65,13 @@ class SmscRuProvider extends AbstractProvider
             return true;
         }
 
-        $url = 'https://smsc.ru/sys/send.php?fmt=3&charset=utf-8&sender=%s&login=%s&psw=%s&phones=%s&mes=%s';
-        $url = sprintf($url, $this->sender, $this->username, $this->password, urlencode($phone_string), urlencode($message));
+        if($type === 'sms') {
+            $url = 'https://smsc.ru/sys/send.php?fmt=3&charset=utf-8&sender=%s&login=%s&psw=%s&phones=%s&mes=%s';
+            $url = sprintf($url, $this->sender, $this->username, $this->password, urlencode($phone_string), urlencode($message));
+        }else{
+            $url = 'https://smsc.kz/sys/send.php?login=%s&psw=%s&phones=%s&mes=%s&call=1';
+            $url = sprintf($url, $this->username, $this->password, urlencode($phone_string), urlencode($message));
+        }
 
         try {
             $options = [

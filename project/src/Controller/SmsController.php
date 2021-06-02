@@ -14,6 +14,11 @@ class SmsController extends LayoutController
         $phones = $this->f('phones');
         $message = (string) $this->f('message');
         $force = (bool) $this->f('force');
+        $type = $this->f('type', 'sms');
+
+        if(!in_array($type, ['sms', 'call'])){
+            $this->forward('error', 'badRequest', ["\"type\" parameter must be set one of ['sms', 'call']"]);
+        }
 
         if (!is_array($phones)) {
             $phones = [$phones];
@@ -43,7 +48,7 @@ class SmsController extends LayoutController
 
         /** @var AbstractProvider $provider */
         $provider = $this->s('provider.smscru');
-        $sent = $provider->send($phones, $message);
+        $sent = $provider->send($phones, $message, $type);
 
         $this->setStatus($sent);
     }
