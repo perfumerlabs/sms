@@ -16,4 +16,13 @@ return [
         'migration_dir' => 'src/Resource/propel/migration',
         'migration_table' => 'sms_propel_migration',
     ],
+    'pg' => [
+        'real_host' => 'db',
+        'host' => 'db',
+        'port' => '5432',
+        'database' => 'sms',
+        'schema' => 'public',
+        'user' => 'postgres',
+        'password' => 'postgres',
+    ],
 ];
